@@ -13,15 +13,17 @@ function [x_zero, if_found] = newton_solver(x0, x_moment, dt, eps_min, nmax, fun
 % if_found - value "0" means that within "nmax" steps the estimated
 %            solution was not good enough ( >eps_min )
 
-    x = x0; %Initial 0 point
-    n = 0;  %Number of steps
+    x = x0; % initial 0 point
+    x_old = x0+10;
+    n = 0;  % number of steps
     
-    while abs(fun(x,x_moment,dt)) > eps_min && n < nmax
+    while abs(x-x_old) > eps_min && n < nmax
+        x_old = x;
         x = x - fun(x,x_moment,dt) / fun_prim(x,dt);
         n = n+1;
     end
     
-    if fun(x,x_moment,dt) > eps_min
+    if abs(x-x_old) > eps_min
         x_zero = 0;
         if_found = 0;
     else
