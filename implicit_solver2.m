@@ -19,7 +19,7 @@ function Y = implicit_solver2(p0, dt, T, eps_min, nmax, fun_newton, fun_newton_p
 %                 Y - array of calculated values.
 
     t = 0:dt:T;
-    newton_0 = 20; % start point of Newton's method
+    newton_0 = p0; % start point of Newton's method
     
     switch (method),    
 
